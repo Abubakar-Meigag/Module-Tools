@@ -8,6 +8,7 @@ def main():
     paths = [arg for arg in argv if not arg.startswith('-')]
     
     show_all = '-a' in dash
+    one_per_line = '-1' in dash
     
     target_dir = paths[0] if paths else '.'
     
@@ -22,8 +23,10 @@ def main():
     else:
         result = [e for e in entries if not e.startswith('.')]
     
-    for entry in result:
-        print(entry)
+    if one_per_line:
+        print('\n'.join(result))
+    else:
+        print('  '.join(result))
 
 if __name__ == "__main__":
     main()
